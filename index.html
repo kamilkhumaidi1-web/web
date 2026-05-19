@@ -203,7 +203,7 @@
         <!-- 1. HALAMAN: BERANDA -->
         <!-- ============================================== -->
         <div id="page-beranda" class="page-section">
-            <!-- HERO SECTION DENGAN BACKGROUND VIDEO (MENGGUNAKAN VIDEO GOOGLE DRIVE USER) -->
+            <!-- HERO SECTION DENGAN BACKGROUND VIDEO -->
             <section class="relative min-h-[85vh] flex items-center text-white py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
                 
                 <!-- BACKGROUND VIDEO CONTAINER -->
@@ -211,8 +211,11 @@
                     <!-- fallback image (jika video gagal dimuat) -->
                     <div class="absolute inset-0 bg-slate-900 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200&auto=format&fit=crop');"></div>
                     
-                    <!-- HTML5 Video Player dengan Link Direct Download dari Google Drive -->
+                    <!-- HTML5 Video Player dengan optimasi Prioritas File Lokal untuk GitHub Pages -->
                     <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-35 min-w-full min-h-full">
+                        <!-- Prioritas Utama: File video lokal di repositori GitHub Anda -->
+                        <source src="video_background.mp4" type="video/mp4">
+                        <!-- Cadangan Kedua: Link direct download Google Drive Anda -->
                         <source src="https://docs.google.com/uc?export=download&id=1OwIpNjl3Qya2WH6ra0TNlu5lnkdEMJmL" type="video/mp4">
                         Browser Anda tidak mendukung pemutaran video background.
                     </video>
