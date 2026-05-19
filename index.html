@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MA Muhammadiyah 1 Karangasem Paciran</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        muhBlue: '#0c2340',
+                        muhRed: '#b91c1c',
+                        muhDarkRed: '#800c0c',
+                        muhYellow: '#f59e0b',
+                        muhOrange: '#f97316',
+                        muhGreen: '#16a34a',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Efek Transisi Mega Menu */
+        .mega-menu {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.25s ease-in-out;
+        }
+        .group:hover .mega-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        /* Spinner Animasi */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .loading-spinner {
+            border-top-color: #f59e0b;
+            animation: spin 0.8s linear infinite;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased font-sans flex flex-col min-h-screen">
+
+    <!-- SCREEN RELOAD LOADER (Efek Memuat Ulang Halaman) -->
+    <div id="page-loader" class="fixed inset-0 bg-muhDarkRed z-[9999] flex flex-col items-center justify-center transition-opacity duration-300 pointer-events-none opacity-0">
+        <div class="text-center space-y-4">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgJ1qwbuD87O4p6J3V2SOVC_DDoyrjyJuxS5pwS6qICupfAfAX3gDPV7WWNLpvAlQu0a80npI3w0hR3PU3b-oRipW57QuvJyE9sfdUHHscpVm-vBMc32Tjsxfuoib1_IVoKawlEneX9q2hs/s320/MA+M1.png" 
+                 alt="MAM 1 Logo" class="h-20 w-auto mx-auto animate-bounce">
+            <div class="w-12 h-12 border-4 border-white/25 border-t-muhYellow rounded-full animate-spin mx-auto"></div>
+            <p class="text-white text-sm font-bold tracking-widest uppercase">Menghubungkan Halaman...</p>
+        </div>
+    </div>
+
+    <!-- TOP BAR INFO -->
+    <div class="bg-muhRed text-white text-xs py-2.5 px-4 md:px-8 flex flex-col sm:flex-row justify-between items-center gap-2 border-b border-red-800">
+        <div class="flex items-center gap-4 flex-wrap justify-center font-medium">
+            <span class="flex items-center gap-1.5"><i class="fa-solid fa-envelope text-muhYellow"></i> info@mam1karangasem.sch.id</span>
+            <span class="hidden md:inline text-red-400">|</span>
+            <span class="flex items-center gap-1.5"><i class="fa-solid fa-phone text-muhYellow"></i> (0322) 666123</span>
+        </div>
+        <div class="flex items-center gap-4 flex-wrap justify-center text-[11px] font-semibold">
+            <a href="javascript:void(0)" onclick="navigateTo('pendaftaran')" class="hover:text-muhYellow transition-all">Beasiswa</a>
+            <span class="text-red-400">|</span>
+            <a href="javascript:void(0)" onclick="navigateTo('akademik')" class="hover:text-muhYellow transition-all">Program Unggulan</a>
+            <span class="text-red-400">|</span>
+            <a href="javascript:void(0)" onclick="navigateTo('profil')" class="hover:text-muhYellow transition-all">Struktur Madrasah</a>
+            <span class="text-red-400">|</span>
+            <span class="bg-muhYellow text-muhBlue px-2 py-0.5 rounded font-bold uppercase tracking-wider text-[9px]">Center of Excellence</span>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER & NAV -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex justify-between items-center">
+            <!-- Logo & Title -->
+            <a href="javascript:void(0)" onclick="navigateTo('beranda')" class="flex items-center gap-3">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgJ1qwbuD87O4p6J3V2SOVC_DDoyrjyJuxS5pwS6qICupfAfAX3gDPV7WWNLpvAlQu0a80npI3w0hR3PU3b-oRipW57QuvJyE9sfdUHHscpVm-vBMc32Tjsxfuoib1_IVoKawlEneX9q2hs/s320/MA+M1.png" 
+                     alt="Logo MA Muhammadiyah 1 Karangasem" 
+                     class="h-12 w-auto md:h-14"
+                     onerror="this.src='https://via.placeholder.com/150?text=MAM1'">
+                <div>
+                    <h1 class="text-xs md:text-sm font-extrabold text-muhBlue leading-tight tracking-tight uppercase">MAM 1 Karangasem</h1>
+                    <p class="text-[10px] md:text-xs text-slate-500 font-medium">Paciran, Lamongan</p>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden lg:flex items-center gap-1">
+                <a href="javascript:void(0)" onclick="navigateTo('beranda')" class="nav-link text-sm font-bold text-muhBlue hover:text-muhRed px-3 py-2 transition-all">Beranda</a>
+                
+                <!-- Mega Menu: PROFIL -->
+                <div class="relative group">
+                    <button class="nav-link text-sm font-bold text-muhBlue hover:text-muhRed px-3 py-2 transition-all flex items-center gap-1 focus:outline-none">
+                        Profil <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                    </button>
+                    <div class="mega-menu absolute left-1/2 -translate-x-1/2 mt-2 w-[460px] bg-muhDarkRed rounded-xl shadow-2xl overflow-hidden border border-red-950 z-50">
+                        <div class="p-6 grid grid-cols-2 gap-4">
+                            <div class="space-y-1">
+                                <a href="javascript:void(0)" onclick="navigateTo('profil')" class="block text-sm font-semibold text-white/90 hover:text-muhYellow hover:translate-x-1 transition-all py-1.5 border-b border-red-900/50"><i class="fa-solid fa-angle-right mr-1.5 text-muhYellow"></i> Sejarah Madrasah</a>
+                                <a href="javascript:void(0)" onclick="navigateTo('profil')" class="block text-sm font-semibold text-white/90 hover:text-muhYellow hover:translate-x-1 transition-all py-1.5 border-b border-red-900/50"><i class="fa-solid fa-angle-right mr-1.5 text-muhYellow"></i> Sambutan Kepala</a>
+                                <a href="javascript:void(0)" onclick="navigateTo('profil')" class="block text-sm font-semibold text-white/90 hover:text-muhYellow hover:translate-x-1 transition-all py-1.5"><i class="fa-solid fa-angle-right mr-1.5 text-muhYellow"></i> Tentang MAM 1</a>
+                            </div>
+                            <div class="space-y-1">
+                                <a href="javascript:void(0)" onclick="navigateTo('profil')" class="block text-sm font-semibold text-white/90 hover:text-muhYellow hover:translate-x-1 transition-all py-1.5 border-b border-red-900/50"><i class="fa-solid fa-angle-right mr-1.5 text-muhYellow"></i> Visi & Misi</a>
+                                <a href="javascript:void(0)" onclick="navigateTo('profil')" class="block text-sm font-semibold text-white/90 hover:text-muhYellow hover:translate-x-1 transition-all py-1.5 border-b border-red-900/50"><i class="fa-solid fa-angle-right mr-1.5 text-muhYellow"></i> Daftar Pendidik</a>
+                                <a href="javascript:void(0)" onclick="navigateTo('profil')" class="block text-sm font-semibold text-white/90 hover:text-muhYellow hover:translate-x-1 transition-all py-1.5"><i class="fa-solid fa-angle-right mr-1.5 text-muhYellow"></i> Struktur Organisasi</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mega Menu: AKADEMIK -->
+                <div class="relative group">
+                    <button class="nav-link text-sm font-bold text-muhBlue hover:text-muhRed px-3 py-2 transition-all flex items-center gap-1 focus:outline-none">
+                        Akademik <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                    </button>
+                    <div class="mega-menu absolute left-1/2 -translate-x-1/2 mt-2 w-[460px] bg-muhDarkRed rounded-xl shadow-2xl overflow-hidden border border-red-950 z-50">
+                        <div class="p-6 grid grid-cols-2 gap-4">
+                            <div class="space-y-1">
+                                <a href="javascript:void(0)" onclick="navigateTo('akademik')" class="block text-sm font-semibold text-white/90 hover:text-muhYellow hover:translate-x-1 transition-all py-1.5 border-b border-red-900/50"><i class="fa-solid fa-angle-right mr-1.5 text-muhYellow"></i> Matematika & IPA</a>
+                                <a href="javascript:void(0)" onclick="navigateTo('akademik')" class="block text-sm font-semibold text-white/90 hover:text-muhYellow hover:translate-x-1 transition-all py-1.5 border-b border-red-900/50"><i class="fa-solid fa-angle-right mr-1.5 text-muhYellow"></i> Ilmu Sosial (IPS)</a>
+                                <a href="javascript:void(0)" onclick="navigateTo('akademik')" class="block text-sm font-semibold text-white/90 hover:text-muhYellow hover:translate-x-1 transition-all py-1.5"><i class="fa-solid fa-angle-right mr-1.5 text-muhYellow"></i> Keagamaan / Tafsir</a>
+                            </div>
+                            <div class="space-y-1">
+                                <a href="javascript:void(0)" onclick="navigateTo('akademik')" class="block text-sm font-semibold text-white/90 hover:text-muhYellow hover:translate-x-1 transition-all py-1.5 border-b border-red-900/50"><i class="fa-solid fa-angle-right mr-1.5 text-muhYellow"></i> Kurikulum Al-Islam</a>
+                                <a href="javascript:void(0)" onclick="navigateTo('akademik')" class="block text-sm font-semibold text-white/90 hover:text-muhYellow hover:translate-x-1 transition-all py-1.5"><i class="fa-solid fa-angle-right mr-1.5 text-muhYellow"></i> Kalender Akademik</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="javascript:void(0)" onclick="navigateTo('fasilitas')" class="nav-link text-sm font-bold text-muhBlue hover:text-muhRed px-3 py-2 transition-all">Fasilitas</a>
+                <a href="javascript:void(0)" onclick="navigateTo('ekstrakurikuler')" class="nav-link text-sm font-bold text-muhBlue hover:text-muhRed px-3 py-2 transition-all">Ekstrakurikuler</a>
+                <a href="javascript:void(0)" onclick="navigateTo('berita')" class="nav-link text-sm font-bold text-muhBlue hover:text-muhRed px-3 py-2 transition-all">Berita</a>
+                
+                <a href="javascript:void(0)" onclick="navigateTo('pendaftaran')" class="ml-4 bg-muhRed hover:bg-red-800 text-white text-xs font-bold px-5 py-3 rounded-full shadow-lg hover:shadow-red-500/20 transition-all uppercase tracking-wider">Daftar Sekarang</a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="lg:hidden text-muhBlue focus:outline-none p-2 rounded-lg hover:bg-slate-100 transition-all">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-slate-100 shadow-inner px-4 py-4 space-y-3">
+            <a href="javascript:void(0)" onclick="navigateTo('beranda')" class="block text-base font-bold text-muhBlue hover:text-muhRed py-2">Beranda</a>
+            
+            <div class="py-1">
+                <button onclick="toggleMobileSub('mob-profil')" class="w-full flex justify-between items-center text-base font-bold text-muhBlue hover:text-muhRed py-2 focus:outline-none">
+                    Profil <span><i class="fa-solid fa-plus text-xs"></i></span>
+                </button>
+                <div id="mob-profil" class="hidden pl-4 py-1 space-y-2 bg-slate-50 rounded-lg">
+                    <a href="javascript:void(0)" onclick="navigateTo('profil')" class="block text-sm font-medium text-slate-600 hover:text-muhRed py-1.5">Sejarah & Sambutan</a>
+                    <a href="javascript:void(0)" onclick="navigateTo('profil')" class="block text-sm font-medium text-slate-600 hover:text-muhRed py-1.5">Visi & Misi</a>
+                </div>
+            </div>
+
+            <div class="py-1">
+                <button onclick="toggleMobileSub('mob-akademik')" class="w-full flex justify-between items-center text-base font-bold text-muhBlue hover:text-muhRed py-2 focus:outline-none">
+                    Akademik <span><i class="fa-solid fa-plus text-xs"></i></span>
+                </button>
+                <div id="mob-akademik" class="hidden pl-4 py-1 space-y-2 bg-slate-50 rounded-lg">
+                    <a href="javascript:void(0)" onclick="navigateTo('akademik')" class="block text-sm font-medium text-slate-600 hover:text-muhRed py-1.5">MIPA & IPS</a>
+                    <a href="javascript:void(0)" onclick="navigateTo('akademik')" class="block text-sm font-medium text-slate-600 hover:text-muhRed py-1.5">Keagamaan / Tafsir</a>
+                </div>
+            </div>
+
+            <a href="javascript:void(0)" onclick="navigateTo('fasilitas')" class="block text-base font-bold text-muhBlue hover:text-muhRed py-2">Fasilitas</a>
+            <a href="javascript:void(0)" onclick="navigateTo('ekstrakurikuler')" class="block text-base font-bold text-muhBlue hover:text-muhRed py-2">Ekstrakurikuler</a>
+            <a href="javascript:void(0)" onclick="navigateTo('berita')" class="block text-base font-bold text-muhBlue hover:text-muhRed py-2">Berita</a>
+            <a href="javascript:void(0)" onclick="navigateTo('pendaftaran')" class="block text-center bg-muhRed hover:bg-red-800 text-white font-bold py-3 rounded-xl shadow-lg transition-all">Daftar Sekarang</a>
+        </div>
+    </header>
+
+
+    <!-- MAIN CONTENT CONTAINERS (PAGE-SPECIFIC ROUTING) -->
+    <main class="flex-grow">
+
+        <!-- ============================================== -->
+        <!-- 1. HALAMAN: BERANDA -->
+        <!-- ============================================== -->
+        <div id="page-beranda" class="page-section">
+            <!-- HERO SECTION DENGAN BACKGROUND VIDEO -->
+            <section class="relative min-h-[85vh] flex items-center text-white py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+                
+                <!-- BACKGROUND VIDEO CONTAINER -->
+                <div class="absolute inset-0 w-full h-full overflow-hidden z-0">
+                    <!-- fallback image (jika video gagal dimuat) -->
+                    <div class="absolute inset-0 bg-slate-900 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200&auto=format&fit=crop');"></div>
+                    
+                    <!-- HTML5 Video Player -->
+                    <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-35 min-w-full min-h-full">
+                        <source src="https://assets.mixkit.co/videos/preview/mixkit-studying-in-the-university-library-34304-large.mp4" type="video/mp4">
+                        Browser Anda tidak mendukung pemutaran video background.
+                    </video>
+                    
+                    <!-- Gradient overlay gelap di atas video untuk kenyamanan membaca teks -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-muhBlue via-muhBlue/90 to-transparent"></div>
+                </div>
+
+                <div class="max-w-5xl mx-auto w-full relative z-10">
+                    <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20 mb-6">
+                        <span class="w-2.5 h-2.5 bg-muhYellow rounded-full animate-ping"></span>
+                        <span class="text-xs md:text-sm font-semibold tracking-wide text-white">PPDB Online TA 2026/2027 Telah Dibuka</span>
+                    </div>
+                    
+                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-6">
+                        Madrasah Aliyah <br class="hidden sm:inline">
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-muhYellow to-muhOrange">Muhammadiyah 1 Karangasem</span>
+                    </h1>
+                    
+                    <p class="text-base sm:text-lg lg:text-xl text-slate-200 max-w-3xl mb-10 leading-relaxed font-light">
+                        Sebagai hulu keilmuan yang aktif mengintegrasikan nilai-nilai keislaman, kebangsaan, dan sains modern demi melahirkan kader persyarikatan yang unggul, berakhlak mulia, dan siap berkontribusi bagi peradaban global. #MAM1Unggul
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="javascript:void(0)" onclick="navigateTo('pendaftaran')" class="bg-muhOrange hover:bg-orange-600 text-white font-bold text-center px-8 py-4 rounded-xl shadow-lg hover:shadow-orange-500/20 transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-file-signature"></i> Pendaftaran Online
+                        </a>
+                        <a href="javascript:void(0)" onclick="navigateTo('profil')" class="border-2 border-white/40 hover:border-white bg-white/5 hover:bg-white/10 text-white font-bold text-center px-8 py-4 rounded-xl backdrop-blur-sm transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-circle-info"></i> Kenali Kami Lebih Jauh
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Wave divider at bottom -->
+                <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10">
+                    <svg viewBox="0 0 1200 120" preserveAspectRatio="none" class="relative block w-full h-[40px] text-slate-50 fill-current">
+                        <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"></path>
+                    </svg>
+                </div>
+            </section>
+
+            <!-- STATISTIK SINGKAT -->
+            <section class="py-12 bg-white border-b border-slate-100">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div class="p-4">
+                        <p class="text-4xl font-extrabold text-muhRed">30+</p>
+                        <p class="text-xs text-slate-500 mt-1 uppercase tracking-wider font-bold">Tenaga Pengajar Profesional</p>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-4xl font-extrabold text-muhBlue">850+</p>
+                        <p class="text-xs text-slate-500 mt-1 uppercase tracking-wider font-bold">Siswa Aktif Berbakat</p>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-4xl font-extrabold text-muhGreen">15+</p>
+                        <p class="text-xs text-slate-500 mt-1 uppercase tracking-wider font-bold">Fasilitas Belajar & Lab</p>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-4xl font-extrabold text-muhOrange">100%</p>
+                        <p class="text-xs text-slate-500 mt-1 uppercase tracking-wider font-bold">Akreditasi A Unggul</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- BERANDA: QUICK HIGHLIGHT PROFIL -->
+            <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6">
+                        <span class="bg-muhRed/10 text-muhRed text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest">Selamat Datang</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-muhBlue">Mencetak Kader Ulama, Ilmuwan, dan Pemimpin Masa Depan</h2>
+                        <p class="text-slate-600 leading-relaxed">
+                            MA Muhammadiyah 1 Karangasem Paciran mengintegrasikan keilmuan akademis modern dengan pendidikan kepribadian Islam yang beradab. Berlokasi di pesisir utara Lamongan, kami berkomitmen membentuk generasi unggul yang mandiri.
+                        </p>
+                        <button onclick="navigateTo('profil')" class="bg-muhBlue hover:bg-blue-900 text-white font-bold px-6 py-3 rounded-xl text-sm transition-all flex items-center gap-2">
+                            Selengkapnya Tentang Profil Kami <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=800&auto=format&fit=crop" class="w-full h-80 object-cover" alt="Siswa MAM 1">
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- 2. HALAMAN: PROFIL -->
+        <!-- ============================================== -->
+        <div id="page-profil" class="page-section hidden">
+            <!-- PROFILE BANNER -->
+            <section class="bg-gradient-to-r from-muhBlue to-slate-900 text-white py-16 px-4 text-center">
+                <h2 class="text-3xl sm:text-4xl font-extrabold">Profil Lengkap Madrasah</h2>
+                <p class="text-xs sm:text-sm text-slate-400 mt-2">Mengenal sejarah, kepemimpinan, visi, misi, dan struktur madrasah kami.</p>
+            </section>
+
+            <!-- SAMBUTAN KEPALA MADRASAH & SEJARAH -->
+            <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="bg-white rounded-3xl overflow-hidden shadow-xl border border-slate-100 p-6">
+                        <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=800&auto=format&fit=crop" class="w-full h-[320px] object-cover rounded-2xl" alt="Kepala Madrasah">
+                        <div class="mt-4 text-center">
+                            <h4 class="text-lg font-extrabold text-muhBlue">Drs. H. Miftahul Amin, M.Pd.</h4>
+                            <p class="text-xs text-muhRed font-bold mt-1">Kepala Madrasah Aliyah Muhammadiyah 1</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-7 space-y-6">
+                    <span class="bg-muhRed/10 text-muhRed text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest">Sambutan Kepala</span>
+                    <h3 class="text-2xl font-extrabold text-muhBlue">Assalamu'alaikum Wr. Wb.</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        Puji syukur kehadirat Allah SWT yang senantiasa melimpahkan hidayah-Nya. MA Muhammadiyah 1 Karangasem Paciran tumbuh sebagai institusi andalan di bawah naungan Pondok Pesantren Karangasem. Kami didukung oleh staf pengajar lulusan universitas terkemuka dalam dan luar negeri, berkomitmen mencetak generasi yang tidak hanya unggul dalam ilmu dunia (Iptek), namun juga tangguh dalam iman dan akhlak (Imtaq).
+                    </p>
+                    <hr class="border-slate-200">
+                    <h3 class="text-2xl font-extrabold text-muhBlue">Sejarah Singkat</h3>
+                    <p class="text-slate-600 leading-relaxed text-sm">
+                        Berdiri di bawah naungan Persyarikatan Muhammadiyah, madrasah ini didirikan untuk merespons kebutuhan umat akan lembaga pendidikan tingkat menengah atas yang berintegritas tinggi. Terletak strategis di kawasan pondok pesantren Paciran, madrasah ini terus bertransformasi menjadi salah satu madrasah digital percontohan di Jawa Timur.
+                    </p>
+                </div>
+            </section>
+
+            <!-- VISI & MISI TAB SECTION -->
+            <section class="bg-slate-100 py-16 px-4">
+                <div class="max-w-4xl mx-auto bg-white p-8 rounded-3xl shadow-lg">
+                    <h3 class="text-2xl font-extrabold text-muhBlue text-center mb-6">Visi & Misi Kami</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-4">
+                            <h4 class="font-bold text-muhRed text-lg border-b pb-2"><i class="fa-solid fa-eye mr-2"></i> Visi</h4>
+                            <p class="text-slate-600 italic leading-relaxed text-sm">
+                                "Terwujudnya Madrasah yang Unggul dalam Imtaq, Iptek, Berakhlak Mulia, Berbudaya Lingkungan, Serta Mandiri."
+                            </p>
+                        </div>
+                        <div class="space-y-4">
+                            <h4 class="font-bold text-muhBlue text-lg border-b pb-2"><i class="fa-solid fa-list-check mr-2"></i> Misi Utama</h4>
+                            <ul class="space-y-2 text-xs text-slate-600">
+                                <li class="flex items-start gap-1.5">
+                                    <i class="fa-solid fa-check text-muhGreen mt-1"></i>
+                                    Menyelenggarakan pembelajaran integratif sains dan keagamaan.
+                                </li>
+                                <li class="flex items-start gap-1.5">
+                                    <i class="fa-solid fa-check text-muhGreen mt-1"></i>
+                                    Membina akhlakul karimah dan kebiasaan islami sehari-hari.
+                                </li>
+                                <li class="flex items-start gap-1.5">
+                                    <i class="fa-solid fa-check text-muhGreen mt-1"></i>
+                                    Mengembangkan talenta siswa melalui bimbingan IT & riset sains.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- 3. HALAMAN: AKADEMIK -->
+        <!-- ============================================== -->
+        <div id="page-akademik" class="page-section hidden">
+            <section class="bg-gradient-to-r from-muhBlue to-slate-900 text-white py-16 px-4 text-center">
+                <h2 class="text-3xl sm:text-4xl font-extrabold">Kurikulum & Program Akademik</h2>
+                <p class="text-xs sm:text-sm text-slate-400 mt-2">Membuka gerbang kecerdasan intelektual dan spiritual melalui 3 program unggulan.</p>
+            </section>
+
+            <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-16">
+                <!-- Program Keahlian Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Jurusan 1 -->
+                    <div class="bg-white p-8 rounded-3xl shadow-xl border border-slate-100 flex flex-col justify-between">
+                        <div>
+                            <div class="w-14 h-14 bg-red-100 text-muhRed rounded-2xl flex items-center justify-center text-2xl mb-6">
+                                <i class="fa-solid fa-microscope"></i>
+                            </div>
+                            <h3 class="text-xl font-extrabold text-muhBlue mb-3">MIPA (Matematika & IPA)</h3>
+                            <p class="text-slate-600 text-xs leading-relaxed mb-6">
+                                Kurikulum dirancang bagi siswa yang bercita-cita melanjutkan studi ke bidang kedokteran, farmasi, teknik komputer, sipil, dan ilmu sains murni.
+                            </p>
+                        </div>
+                        <ul class="space-y-2 border-t pt-4 text-xs text-slate-500">
+                            <li><i class="fa-solid fa-circle-check text-muhRed mr-1.5"></i> Pendalaman Fisika, Kimia, Biologi</li>
+                            <li><i class="fa-solid fa-circle-check text-muhRed mr-1.5"></i> Praktikum Laboratorium Terpadu</li>
+                            <li><i class="fa-solid fa-circle-check text-muhRed mr-1.5"></i> Kelas Intensif Olimpiade Sains</li>
+                        </ul>
+                    </div>
+
+                    <!-- Jurusan 2 -->
+                    <div class="bg-white p-8 rounded-3xl shadow-xl border border-slate-100 flex flex-col justify-between">
+                        <div>
+                            <div class="w-14 h-14 bg-blue-100 text-muhBlue rounded-2xl flex items-center justify-center text-2xl mb-6">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                            <h3 class="text-xl font-extrabold text-muhBlue mb-3">IPS (Ilmu Pengetahuan Sosial)</h3>
+                            <p class="text-slate-600 text-xs leading-relaxed mb-6">
+                                Membentuk karakter kritis dalam mengamati dinamika masyarakat, ekonomi mikro/makro, akuntansi, sosiologi, dan hukum.
+                            </p>
+                        </div>
+                        <ul class="space-y-2 border-t pt-4 text-xs text-slate-500">
+                            <li><i class="fa-solid fa-circle-check text-muhBlue mr-1.5"></i> Proyek Sosial & Penelitian Lapangan</li>
+                            <li><i class="fa-solid fa-circle-check text-muhBlue mr-1.5"></i> Inkubator Kewirausahaan Mandiri</li>
+                            <li><i class="fa-solid fa-circle-check text-muhBlue mr-1.5"></i> Pelatihan Kepemimpinan Publik</li>
+                        </ul>
+                    </div>
+
+                    <!-- Jurusan 3 -->
+                    <div class="bg-white p-8 rounded-3xl shadow-xl border border-slate-100 flex flex-col justify-between">
+                        <div>
+                            <div class="w-14 h-14 bg-amber-100 text-muhYellow rounded-2xl flex items-center justify-center text-2xl mb-6">
+                                <i class="fa-solid fa-book-quran"></i>
+                            </div>
+                            <h3 class="text-xl font-extrabold text-muhBlue mb-3">Keagamaan / Tafsir</h3>
+                            <p class="text-slate-600 text-xs leading-relaxed mb-6">
+                                Membina hafalan Qur'an secara berkala dan mengajarkan kajian kitab klasik (kitab kuning) serta retorika dakwah.
+                            </p>
+                        </div>
+                        <ul class="space-y-2 border-t pt-4 text-xs text-slate-500">
+                            <li><i class="fa-solid fa-circle-check text-muhYellow mr-1.5"></i> Target Hafalan 5-10 Juz</li>
+                            <li><i class="fa-solid fa-circle-check text-muhYellow mr-1.5"></i> Bimbingan Bahasa Arab Intensif</li>
+                            <li><i class="fa-solid fa-circle-check text-muhYellow mr-1.5"></i> Persiapan Studi Timur Tengah</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Kurikulum Khas Muhammadiyah -->
+                <div class="bg-amber-50 p-8 rounded-3xl border border-amber-200 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-2xl font-extrabold text-muhBlue mb-4">Kurikulum Al-Islam, Kemuhammadiyahan, & Bahasa Arab (ISMUBA)</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                            Sebagai bagian dari sistem pendidikan Muhammadiyah, kami memberikan bekal keagamaan mendalam yang ramah, berkemajuan, dan moderat untuk menyiapkan kader terbaik persyarikatan dan umat.
+                        </p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-amber-100 space-y-4">
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-muhYellow/20 text-muhYellow flex items-center justify-center font-bold text-xs">A</span>
+                            <span class="text-sm font-semibold text-slate-700">Akidah Akhlak & Tarikh Islam</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-muhYellow/20 text-muhYellow flex items-center justify-center font-bold text-xs">B</span>
+                            <span class="text-sm font-semibold text-slate-700">Ibadah Praktis Sesuai Putusan Tarjih</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-muhYellow/20 text-muhYellow flex items-center justify-center font-bold text-xs">C</span>
+                            <span class="text-sm font-semibold text-slate-700">Muhadharah (Latihan Pidato Tiga Bahasa)</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- 4. HALAMAN: FASILITAS -->
+        <!-- ============================================== -->
+        <div id="page-fasilitas" class="page-section hidden">
+            <!-- FASILITAS BANNER -->
+            <section class="bg-gradient-to-r from-muhBlue to-slate-900 text-white py-16 px-4 text-center">
+                <h2 class="text-3xl sm:text-4xl font-extrabold">Fasilitas & Infrastruktur Kampus</h2>
+                <p class="text-xs sm:text-sm text-slate-400 mt-2">Dukungan sarana lengkap demi menunjang proses pembelajaran digital yang interaktif.</p>
+            </section>
+
+            <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Fasilitas 1 -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-slate-100">
+                        <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=600&auto=format&fit=crop" class="w-full h-56 object-cover" alt="Ruang Kelas AC">
+                        <div class="p-6">
+                            <h4 class="text-lg font-bold text-muhBlue">Gedung Kelas AC & Smart TV</h4>
+                            <p class="text-xs text-slate-500 mt-2">Setiap ruang belajar dilengkapi proyektor interaktif, koneksi nirkabel cepat, serta AC ganda guna menciptakan atmosfer belajar yang fokus dan produktif.</p>
+                        </div>
+                    </div>
+
+                    <!-- Fasilitas 2 -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-slate-100">
+                        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=600&auto=format&fit=crop" class="w-full h-56 object-cover" alt="Lab Komputer">
+                        <div class="p-6">
+                            <h4 class="text-lg font-bold text-muhBlue">Laboratorium Komputer Modern</h4>
+                            <p class="text-xs text-slate-500 mt-2">Menyediakan perangkat komputer spesifikasi tinggi untuk pemrograman, desain grafis, riset robotika, dan pelaksanaan Asesmen Nasional Berbasis Komputer (ANBK).</p>
+                        </div>
+                    </div>
+
+                    <!-- Fasilitas 3 -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-slate-100">
+                        <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=600&auto=format&fit=crop" class="w-full h-56 object-cover" alt="Perpustakaan">
+                        <div class="p-6">
+                            <h4 class="text-lg font-bold text-muhBlue">Perpustakaan & Ruang Baca Digital</h4>
+                            <p class="text-xs text-slate-500 mt-2">Dilengkapi puluhan ribu referensi buku sains, keagamaan, jurnal penelitian, serta komputer tablet pencarian e-book digital.</p>
+                        </div>
+                    </div>
+
+                    <!-- Fasilitas 4 -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-slate-100">
+                        <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=600&auto=format&fit=crop" class="w-full h-56 object-cover" alt="Lapangan Olahraga">
+                        <div class="p-6">
+                            <h4 class="text-lg font-bold text-muhBlue">Gedung Olahraga & Lapangan Multifungsi</h4>
+                            <p class="text-xs text-slate-500 mt-2">Area indoor multifungsi yang mendukung kegiatan basket, futsal, bulutangkis, serta latihan pencak silat Tapak Suci.</p>
+                        </div>
+                    </div>
+
+                    <!-- Fasilitas 5 -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-slate-100">
+                        <img src="https://images.unsplash.com/photo-1564694204458-a626ad980121?q=80&w=600&auto=format&fit=crop" class="w-full h-56 object-cover" alt="Lab IPA">
+                        <div class="p-6">
+                            <h4 class="text-lg font-bold text-muhBlue">Laboratorium Biologi, Fisika & Kimia</h4>
+                            <p class="text-xs text-slate-500 mt-2">Menyediakan peralatan mikroskop digital teranyar, bahan uji laboratorium lengkap, serta ruang khusus pengerjaan proyek riset ilmiah siswa.</p>
+                        </div>
+                    </div>
+
+                    <!-- Fasilitas 6 -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-slate-100">
+                        <img src="https://images.unsplash.com/photo-1478147427282-58a87a120781?q=80&w=600&auto=format&fit=crop" class="w-full h-56 object-cover" alt="Masjid Kampus">
+                        <div class="p-6">
+                            <h4 class="text-lg font-bold text-muhBlue">Masjid Pembinaan Karakter</h4>
+                            <p class="text-xs text-slate-500 mt-2">Masjid megah sebagai sentra utama ibadah harian berjamaah, tahfidz pagi, ceramah kepemimpinan, dan bimbingan keputrian siswi.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- 5. HALAMAN: EKSTRAKURIKULER -->
+        <!-- ============================================== -->
+        <div id="page-ekstrakurikuler" class="page-section hidden">
+            <!-- EKSTRA BANNER -->
+            <section class="bg-gradient-to-r from-muhBlue to-slate-900 text-white py-16 px-4 text-center">
+                <h2 class="text-3xl sm:text-4xl font-extrabold">Ekstrakurikuler & Pengembangan Bakat</h2>
+                <p class="text-xs sm:text-sm text-slate-400 mt-2">Membentuk keterampilan praktis, kedisiplinan diri, dan kepekaan sosial siswa.</p>
+            </section>
+
+            <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Ekstra 1 -->
+                    <div class="bg-white rounded-2xl shadow-md border border-slate-100 p-6 flex gap-4 items-start">
+                        <div class="w-12 h-12 bg-red-100 text-muhRed rounded-xl flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-people-group"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-muhBlue text-lg">Ikatan Pelajar Muhammadiyah (IPM)</h4>
+                            <p class="text-xs text-slate-500 mt-2">Organisasi otonom resmi wadah latihan kepemimpinan, koordinasi acara besar, serta pengabdian masyarakat guna membangun karakter berani dan kritis.</p>
+                        </div>
+                    </div>
+
+                    <!-- Ekstra 2 -->
+                    <div class="bg-white rounded-2xl shadow-md border border-slate-100 p-6 flex gap-4 items-start">
+                        <div class="w-12 h-12 bg-green-100 text-muhGreen rounded-xl flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-compass"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-muhBlue text-lg">Kepanduan Hizbul Wathan (HW)</h4>
+                            <p class="text-xs text-slate-500 mt-2">Melatih kecintaan alam bebas, ketangkasan berkemah, kebersamaan tim, pertolongan pertama gawat darurat, dan cinta tanah air.</p>
+                        </div>
+                    </div>
+
+                    <!-- Ekstra 3 -->
+                    <div class="bg-white rounded-2xl shadow-md border border-slate-100 p-6 flex gap-4 items-start">
+                        <div class="w-12 h-12 bg-amber-100 text-muhYellow rounded-xl flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-muhBlue text-lg">Pencak Silat Tapak Suci</h4>
+                            <p class="text-xs text-slate-500 mt-2">Seni bela diri khas Muhammadiyah dengan fokus kedisiplinan mental dan ketahanan fisik, telah meraih segudang prestasi kejuaraan regional.</p>
+                        </div>
+                    </div>
+
+                    <!-- Ekstra 4 -->
+                    <div class="bg-white rounded-2xl shadow-md border border-slate-100 p-6 flex gap-4 items-start">
+                        <div class="w-12 h-12 bg-blue-100 text-muhBlue rounded-xl flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-muhBlue text-lg">IT & Robotics Club</h4>
+                            <p class="text-xs text-slate-500 mt-2">Eksplorasi perancangan web dasar, pemrograman algoritma logika, pembuatan robot sederhana, serta pengerjaan animasi grafis kreatif digital.</p>
+                        </div>
+                    </div>
+
+                    <!-- Ekstra 5 -->
+                    <div class="bg-white rounded-2xl shadow-md border border-slate-100 p-6 flex gap-4 items-start">
+                        <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-language"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-muhBlue text-lg">English & Arabic Speaking Society</h4>
+                            <p class="text-xs text-slate-500 mt-2">Melatih kemandirian orasi, tata kelola debat bahasa asing, kontes drama panggung, serta percakapan harian interaktif di kelas berasrama.</p>
+                        </div>
+                    </div>
+
+                    <!-- Ekstra 6 -->
+                    <div class="bg-white rounded-2xl shadow-md border border-slate-100 p-6 flex gap-4 items-start">
+                        <div class="w-12 h-12 bg-orange-100 text-muhOrange rounded-xl flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-newspaper"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-muhBlue text-lg">Jurnalistik & Fotografi</h4>
+                            <p class="text-xs text-slate-500 mt-2">Latihan mengolah sudut pandang berita sekolah, tata kamera sinematografi, wawancara tokoh publik, serta tata kelola buletin dinding madrasah.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- 6. HALAMAN: BERITA -->
+        <!-- ============================================== -->
+        <div id="page-berita" class="page-section hidden">
+            <!-- BERITA BANNER -->
+            <section class="bg-gradient-to-r from-muhBlue to-slate-900 text-white py-16 px-4 text-center">
+                <h2 class="text-3xl sm:text-4xl font-extrabold">Kanal Informasi & Berita Terkini</h2>
+                <p class="text-xs sm:text-sm text-slate-400 mt-2">Berbagi seputar dinamika madrasah, prestasi lomba siswa, pengumuman penting, dan agenda kegiatan.</p>
+            </section>
+
+            <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Artikel 1 -->
+                    <article class="bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100 flex flex-col justify-between">
+                        <div>
+                            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600&auto=format&fit=crop" class="w-full h-52 object-cover" alt="Medali Emas">
+                            <div class="p-6">
+                                <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold tracking-wider px-2 py-1 rounded">PRESTASI</span>
+                                <h3 class="text-lg font-bold text-muhBlue mt-2 leading-snug">Siswa MAM 1 Karangasem Raih Medali Emas Olimpiade Astronomi Nasional 2026</h3>
+                                <p class="text-xs text-slate-500 mt-2">Rahmat Hidayat (XI MIPA) mempersembahkan prestasi tertinggi di ajang kompetisi astronomi nasional bergengsi...</p>
+                            </div>
+                        </div>
+                        <div class="p-6 border-t border-slate-50">
+                            <span class="text-xs font-semibold text-slate-400">15 Mei 2026</span>
+                        </div>
+                    </article>
+
+                    <!-- Artikel 2 -->
+                    <article class="bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100 flex flex-col justify-between">
+                        <div>
+                            <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=600&auto=format&fit=crop" class="w-full h-52 object-cover" alt="Wisuda Quran">
+                            <div class="p-6">
+                                <span class="bg-blue-100 text-blue-800 text-[10px] font-bold tracking-wider px-2 py-1 rounded">AKTIVITAS</span>
+                                <h3 class="text-lg font-bold text-muhBlue mt-2 leading-snug">Wisuda Tahfidz Qur'an Juz 30 & Wisuda Khotmil Qur'an Berlangsung Khidmat</h3>
+                                <p class="text-xs text-slate-500 mt-2">Prosesi wisuda tahfidz tahunan diikuti 85 siswa dengan penuh rasa syukur dari seluruh jajaran wali murid dan pengasuh...</p>
+                            </div>
+                        </div>
+                        <div class="p-6 border-t border-slate-50">
+                            <span class="text-xs font-semibold text-slate-400">10 Mei 2026</span>
+                        </div>
+                    </article>
+
+                    <!-- Artikel 3 -->
+                    <article class="bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100 flex flex-col justify-between">
+                        <div>
+                            <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=600&auto=format&fit=crop" class="w-full h-52 object-cover" alt="AI SmartClass">
+                            <div class="p-6">
+                                <span class="bg-amber-100 text-amber-800 text-[10px] font-bold tracking-wider px-2 py-1 rounded">TEKNOLOGI</span>
+                                <h3 class="text-lg font-bold text-muhBlue mt-2 leading-snug">MAM 1 Karangasem Luncurkan Platform Pembelajaran Berbasis AI SmartClass</h3>
+                                <p class="text-xs text-slate-500 mt-2">Mengoptimalkan sistem pendidikan digital terintegrasi di kelas guna memandu evaluasi akademik siswa secara presisi...</p>
+                            </div>
+                        </div>
+                        <div class="p-6 border-t border-slate-50">
+                            <span class="text-xs font-semibold text-slate-400">05 Mei 2026</span>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- 7. HALAMAN: PENDAFTARAN -->
+        <!-- ============================================== -->
+        <div id="page-pendaftaran" class="page-section hidden">
+            <!-- PPDB BANNER -->
+            <section class="bg-gradient-to-r from-muhBlue to-slate-900 text-white py-16 px-4 text-center">
+                <h2 class="text-3xl sm:text-4xl font-extrabold">Penerimaan Peserta Didik Baru (PPDB)</h2>
+                <p class="text-xs sm:text-sm text-slate-400 mt-2">Raih masa depan gemilang dengan bergabung bersama keluarga besar MAM 1 Karangasem Paciran.</p>
+            </section>
+
+            <section class="py-16 px-4 max-w-4xl mx-auto">
+                <div class="bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden">
+                    <div class="bg-muhDarkRed text-white p-8 text-center">
+                        <h3 class="text-xl font-extrabold">Formulir Pendaftaran Siswa Baru TA 2026/2027</h3>
+                        <p class="text-xs text-white/80 mt-1">Isi data lengkap Anda secara jujur, tim admin PPDB akan merespons data Anda segera.</p>
+                    </div>
+
+                    <!-- Form -->
+                    <form id="ppdb-form" onsubmit="handleFormSubmit(event)" class="p-8 space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-extrabold uppercase text-slate-500 mb-2">Nama Lengkap Siswa</label>
+                                <input type="text" id="fullname" required placeholder="Contoh: Muhammad Ali" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:border-muhBlue transition-all">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-extrabold uppercase text-slate-500 mb-2">Asal Sekolah (SMP / MTs)</label>
+                                <input type="text" id="oldschool" required placeholder="Contoh: MTs Muhammadiyah 1 Paciran" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:border-muhBlue transition-all">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-extrabold uppercase text-slate-500 mb-2">Nomor WhatsApp Aktif</label>
+                                <input type="tel" id="whatsapp" required placeholder="Contoh: 081234567890" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:border-muhBlue transition-all">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-extrabold uppercase text-slate-500 mb-2">Pilihan Program Keahlian</label>
+                                <select id="program" required class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:border-muhBlue transition-all">
+                                    <option value="">-- Pilih Jurusan --</option>
+                                    <option value="MIPA">Matematika & IPA (MIPA)</option>
+                                    <option value="IPS">Ilmu Pengetahuan Sosial (IPS)</option>
+                                    <option value="Keagamaan">Program Keagamaan / Tafsir</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-extrabold uppercase text-slate-500 mb-2">Alamat Lengkap Rumah</label>
+                            <textarea id="address" required rows="3" placeholder="Nama Jalan, Kelurahan, Kecamatan, Kabupaten/Kota" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:border-muhBlue transition-all"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-muhRed hover:bg-red-800 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-red-500/20 transition-all uppercase tracking-wider text-sm flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i> Kirim Berkas Pendaftaran
+                        </button>
+                    </form>
+
+                    <!-- Success Alert -->
+                    <div id="success-alert" class="hidden p-8 text-center space-y-4">
+                        <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-3xl mx-auto">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <h4 class="text-xl font-extrabold text-muhBlue">Data Anda Telah Kami Rekam!</h4>
+                        <p class="text-slate-500 text-sm max-w-md mx-auto">
+                            Terima kasih telah melakukan pendaftaran awal di MAM 1 Karangasem. Berkas elektronik sudah dikirimkan kepada panitia PPDB. Kami akan segera menghubungi Anda melalui WhatsApp dalam waktu 1x24 jam.
+                        </p>
+                        <button onclick="resetForm()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-6 py-2.5 rounded-xl text-sm transition-all">
+                            Daftarkan Siswa Lain
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+
+    <!-- LOKASI / MAPS -->
+    <section class="bg-white py-16 px-4 sm:px-6 lg:px-8 border-t border-slate-100">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <span class="bg-muhBlue/10 text-muhBlue text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest">Maps</span>
+                <h2 class="text-3xl font-extrabold text-muhBlue">Lokasi Kampus & Kontak Resmi</h2>
+                <div class="space-y-4">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-slate-100 text-muhBlue rounded-xl flex items-center justify-center text-lg shrink-0">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div>
+                            <h5 class="font-extrabold text-muhBlue text-sm">Alamat Kampus</h5>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">Kompleks Pondok Pesantren Karangasem Muhammadiyah Paciran, Lamongan, Jawa Timur, 62264.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-slate-100 text-muhBlue rounded-xl flex items-center justify-center text-lg shrink-0">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                        <div>
+                            <h5 class="font-extrabold text-muhBlue text-sm">Jam Layanan Kantor</h5>
+                            <p class="text-xs text-slate-500 mt-1">Senin - Sabtu | 07:00 - 14:00 WIB</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Google Map -->
+            <div class="h-[300px] rounded-3xl overflow-hidden border border-slate-200 shadow-xl relative">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15848.167885061453!2d112.35515234999998!3d-6.885542750000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e77e2ffeb97f1ab%3A0xe1db3bfa47230b0b!2sPaciran%2C%20Lamongan%20Regency%2C%20East%20Java!5e0!3m2!1sen!2sid!4v1716104800000!5m2!1sen!2sid" 
+                        class="w-full h-full border-none" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-300 py-16 px-4 sm:px-6 lg:px-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
+            <!-- Branding -->
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgJ1qwbuD87O4p6J3V2SOVC_DDoyrjyJuxS5pwS6qICupfAfAX3gDPV7WWNLpvAlQu0a80npI3w0hR3PU3b-oRipW57QuvJyE9sfdUHHscpVm-vBMc32Tjsxfuoib1_IVoKawlEneX9q2hs/s320/MA+M1.png" 
+                         alt="Logo MAM 1" class="h-12 w-auto" onerror="this.src='https://via.placeholder.com/150?text=MAM1'">
+                    <div>
+                        <h4 class="text-white font-extrabold text-sm uppercase">MAM 1 Karangasem</h4>
+                        <p class="text-[10px] text-slate-500 font-semibold">Paciran, Lamongan</p>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Unggul dalam Imtaq, Iptek, Berakhlak Mulia, Berbudaya Lingkungan, Serta Mandiri.
+                </p>
+            </div>
+
+            <!-- Tautan Penting -->
+            <div>
+                <h5 class="text-white font-bold text-sm uppercase mb-4 tracking-wider">Tautan Cepat</h5>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="javascript:void(0)" onclick="navigateTo('beranda')" class="hover:text-muhYellow transition-all">Beranda</a></li>
+                    <li><a href="javascript:void(0)" onclick="navigateTo('profil')" class="hover:text-muhYellow transition-all">Profil</a></li>
+                    <li><a href="javascript:void(0)" onclick="navigateTo('akademik')" class="hover:text-muhYellow transition-all">Program Akademik</a></li>
+                    <li><a href="javascript:void(0)" onclick="navigateTo('fasilitas')" class="hover:text-muhYellow transition-all">Fasilitas</a></li>
+                    <li><a href="javascript:void(0)" onclick="navigateTo('ekstrakurikuler')" class="hover:text-muhYellow transition-all">Ekstrakurikuler</a></li>
+                </ul>
+            </div>
+
+            <!-- Jurusan -->
+            <div>
+                <h5 class="text-white font-bold text-sm uppercase mb-4 tracking-wider">Program Jurusan</h5>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="javascript:void(0)" onclick="navigateTo('akademik')" class="hover:text-muhYellow transition-all">MIPA (Matematika & IPA)</a></li>
+                    <li><a href="javascript:void(0)" onclick="navigateTo('akademik')" class="hover:text-muhYellow transition-all">IPS (Ilmu Sosial)</a></li>
+                    <li><a href="javascript:void(0)" onclick="navigateTo('akademik')" class="hover:text-muhYellow transition-all">Program Keagamaan / Tafsir</a></li>
+                </ul>
+            </div>
+
+            <!-- Hubungi -->
+            <div class="space-y-4">
+                <h5 class="text-white font-bold text-sm uppercase tracking-wider">Berlangganan Info</h5>
+                <p class="text-xs text-slate-400">Masukkan email untuk mendapatkan buletin mingguan kegiatan madrasah.</p>
+                <div class="flex gap-2">
+                    <input type="email" placeholder="Email Anda" class="bg-slate-800 border border-slate-700 text-xs rounded-xl px-3 py-2.5 w-full focus:outline-none text-white">
+                    <button class="bg-muhYellow hover:bg-yellow-600 text-slate-900 font-bold px-4 rounded-xl text-xs transition-all">Gabung</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto border-t border-slate-800 mt-12 pt-6 text-center text-xs text-slate-500">
+            <p>© 2026 MA Muhammadiyah 1 Karangasem Paciran. Hak Cipta Dilindungi Undang-Undang.</p>
+        </div>
+    </footer>
+
+    <!-- FLOAT WHATSAPP BUTTON -->
+    <a href="https://wa.me/6281234567890?text=Assalamu'alaikum,%20saya%20tertarik%20mendaftar%20di%20MAM%201%20Karangasem..." 
+       target="_blank" 
+       class="fixed bottom-6 right-6 z-50 bg-emerald-500 hover:bg-emerald-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all text-2xl"
+       title="Hubungi Kami via WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- CUSTOM ROUTER LOGIC -->
+    <script>
+        // Router Navigation dengan Simulasi Reloading
+        function navigateTo(pageId) {
+            const loader = document.getElementById('page-loader');
+            
+            // 1. Tampilkan transisi loader penuh (efek reload)
+            loader.classList.remove('pointer-events-none', 'opacity-0');
+            loader.classList.add('opacity-100');
+
+            // Tutup menu mobile jika sedang terbuka
+            document.getElementById('mobile-menu').classList.add('hidden');
+
+            setTimeout(() => {
+                // 2. Sembunyikan semua section kontainer halaman
+                const pages = document.querySelectorAll('.page-section');
+                pages.forEach(page => {
+                    page.classList.add('hidden');
+                });
+
+                // 3. Tampilkan halaman target utama
+                const activePage = document.getElementById(`page-${pageId}`);
+                if (activePage) {
+                    activePage.classList.remove('hidden');
+                }
+
+                // 4. Perbarui status penanda menu aktif
+                updateActiveMenuLink(pageId);
+
+                // 5. Gulir ke atas
+                window.scrollTo({ top: 0, behavior: 'auto' });
+
+                // 6. Matikan transisi loader setelah rendering selesai
+                setTimeout(() => {
+                    loader.classList.remove('opacity-100');
+                    loader.classList.add('opacity-0', 'pointer-events-none');
+                }, 200);
+
+            }, 700);
+        }
+
+        // Memperbarui styling navigasi yang aktif
+        function updateActiveMenuLink(pageId) {
+            const links = document.querySelectorAll('.nav-link');
+            links.forEach(link => {
+                if (link.textContent.toLowerCase().trim().includes(pageId.substring(0, 5))) {
+                    link.classList.add('text-muhRed');
+                    link.classList.remove('text-muhBlue');
+                } else {
+                    link.classList.remove('text-muhRed');
+                    link.classList.add('text-muhBlue');
+                }
+            });
+        }
+
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Toggle Submenu di Mobile
+        function toggleMobileSub(subId) {
+            const sub = document.getElementById(subId);
+            sub.classList.toggle('hidden');
+        }
+
+        // PPDB Form Submission
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            document.getElementById('ppdb-form').classList.add('hidden');
+            document.getElementById('success-alert').classList.remove('hidden');
+        }
+
+        // Reset Form
+        function resetForm() {
+            document.getElementById('ppdb-form').reset();
+            document.getElementById('ppdb-form').classList.remove('hidden');
+            document.getElementById('success-alert').classList.add('hidden');
+        }
+
+        // Inisialisasi awal ke beranda
+        window.onload = function() {
+            navigateTo('beranda');
+        };
+    </script>
+</body>
+</html>
