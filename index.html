@@ -198,7 +198,7 @@
         <!-- 1. HALAMAN: BERANDA -->
         <!-- ============================================== -->
         <div id="page-beranda" class="page-section">
-            <!-- HERO SECTION DENGAN BACKGROUND VIDEO -->
+            <!-- HERO SECTION DENGAN BACKGROUND VIDEO (MENGGUNAKAN VIDEO GOOGLE DRIVE USER) -->
             <section class="relative min-h-[85vh] flex items-center text-white py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
                 
                 <!-- BACKGROUND VIDEO CONTAINER -->
@@ -206,13 +206,13 @@
                     <!-- fallback image (jika video gagal dimuat) -->
                     <div class="absolute inset-0 bg-slate-900 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200&auto=format&fit=crop');"></div>
                     
-                    <!-- HTML5 Video Player -->
+                    <!-- HTML5 Video Player dengan Link Direct Download dari Google Drive -->
                     <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-35 min-w-full min-h-full">
-                        <source src="https://drive.google.com/file/d/1OwIpNjl3Qya2WH6ra0TNlu5lnkdEMJmL/view?usp=drive_link" type="video/mp4">
+                        <source src="https://docs.google.com/uc?export=download&id=1OwIpNjl3Qya2WH6ra0TNlu5lnkdEMJmL" type="video/mp4">
                         Browser Anda tidak mendukung pemutaran video background.
                     </video>
                     
-                    <!-- Gradient overlay gelap di atas video untuk kenyamanan membaca teks -->
+                    <!-- Gradient overlay gelap di atas video -->
                     <div class="absolute inset-0 bg-gradient-to-r from-muhBlue via-muhBlue/90 to-transparent"></div>
                 </div>
 
@@ -764,9 +764,9 @@
                     </div>
                 </div>
             </div>
-            <!-- Google Map -->
+            <!-- Google Map Terintegrasi Dengan Lokasi MA Muhammadiyah 1 Karangasem Paciran -->
             <div class="h-[300px] rounded-3xl overflow-hidden border border-slate-200 shadow-xl relative">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15848.167885061453!2d112.35515234999998!3d-6.885542750000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e77e2ffeb97f1ab%3A0xe1db3bfa47230b0b!2sPaciran%2C%20Lamongan%20Regency%2C%20East%20Java!5e0!3m2!1sen!2sid!4v1716104800000!5m2!1sen!2sid" 
+                <iframe src="https://maps.google.com/maps?q=MA%20Muhammadiyah%201%20Karangasem%20Paciran%20Lamongan&t=&z=16&ie=UTF8&iwloc=&output=embed" 
                         class="w-full h-full border-none" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
